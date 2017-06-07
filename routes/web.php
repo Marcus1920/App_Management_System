@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('getAll','IterationController@index');
+Route::get('getIteration/{id}','IterationController@show');
+Route::get('storeIteration','IterationController@store');
+Route::get('editIteration/{id}','IterationController@edit');
+Route::get('deleteIteration/{id}','IterationController@destroy');
