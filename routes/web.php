@@ -14,3 +14,18 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//
+Route::get('/login','LoginController@login');
+Route::post('login','LoginController@postlogin');
+
+//Auth::routes();
+Route::get('/logout', function (){
+ Sentinel::logout(null, true);
+});
+Route::get('home', 'HomeController@index')->name('home');
+Route::get('register','RegisterController@registrationForm');
+Route::post('register','RegisterController@registerUser');
+
+
+
