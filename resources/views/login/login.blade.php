@@ -32,7 +32,9 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
-
+   @if($errors->any())
+     <span style="color: red">{{$errors->first()}}</span>
+    @endif
     <form action="login"  method="post">
       {{ csrf_field() }}
     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -75,7 +77,7 @@
 
     <!-- /.social-auth-links -->
 
-    <a href="#">I forgot my password</a><br>
+    <a href="forgotpassword">I forgot my password</a><br>
 
 
   </div>

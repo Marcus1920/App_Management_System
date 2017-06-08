@@ -20,7 +20,8 @@
 Route::get('/','LoginController@login');
 Route::post('login','LoginController@postlogin');
 
-
+Route::post('forgotpassword','RecoverPasswordController@reset');
+Route::get('forgotpassword','RecoverPasswordController@index');
 
 //Auth::routes();
 
@@ -29,8 +30,13 @@ Route::get('register','RegisterController@registrationForm');
 Route::post('register','RegisterController@registerUser');
 Route::get('logout' , 'RegisterController@logout') ;
 
+
+Route::get('add-iteration',function(){
+    return view('apps.add');
+});
+
 Route::get('getAll','IterationController@index');
 Route::get('getIteration/{id}','IterationController@show');
-Route::get('storeIteration','IterationController@store');
+Route::post('storeIteration','IterationController@store');
 Route::get('editIteration/{id}','IterationController@edit');
 Route::get('deleteIteration/{id}','IterationController@destroy');

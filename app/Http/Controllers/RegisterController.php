@@ -11,14 +11,18 @@ class RegisterController extends Controller
 
   public function registrationForm()
 {
-    return view('registration.registration');
+    if(session()->get('username')) {
+        return view('registration.registration');
+    }else{
+        return redirect('../');
+    }
 
 }
 
       public function logout()
       {
 
-
+       session()->flush();
        Sentinel::logout(null, true);
 
           return   redirect('/');

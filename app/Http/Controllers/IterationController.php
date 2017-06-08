@@ -21,7 +21,12 @@ class IterationController extends Controller
      */
     public function index()
     {
-      return $this->iteration->getAll();
+	    if(session()->get('username')){
+      $iterations = $this->iteration->getAll();
+      return view('apps.listing', compact('iterations'));
+	    }else{
+   return redirect('../');		    
+	    }
     }
 
     /**
@@ -43,12 +48,13 @@ class IterationController extends Controller
     public function store(Request $request)
     {
 	$iterations = [
-			'name' => 'Ports',
-			'version' => '3.2.7',
-			'installs' => '39',
+			'name' => $request['name'],
+			'version' => $request['version'],
+			'installs' => 0,
 			];
 			
 	$this->iteration->store($iterations);
+	return redirect('getAll');
     }
 
     /**
