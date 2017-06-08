@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('getIterationSettings','IterationSettingController@index');
+Route::get('getIterationSetting/{id}','IterationSettingController@show');
+Route::get('storeIterationSettings','IterationSettingController@store');
