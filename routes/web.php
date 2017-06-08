@@ -14,6 +14,7 @@
 /*Route::get('/', function () {
     return view('welcome');
 });
+
 */
 
 //
@@ -40,3 +41,8 @@ Route::get('getIteration/{id}','IterationController@show');
 Route::post('storeIteration','IterationController@store');
 Route::get('editIteration/{id}','IterationController@edit');
 Route::get('deleteIteration/{id}','IterationController@destroy');
+
+Route::get('getIterationSettings','IterationSettingController@index');
+Route::get('getIterationSetting/{id}','IterationSettingController@show');
+Route::get('storeIterationSettings','IterationSettingController@store');
+
