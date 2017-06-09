@@ -27,5 +27,8 @@
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
+	<!-- Test Database 
+        <env name="DB_DATABASE" value="siyaleader_mobile_db_testing"/>-->
+	
     </php>
 </phpunit>
