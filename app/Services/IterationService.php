@@ -5,12 +5,12 @@ use App\Iteration;
 class IterationService
 {
     public function getAll(){
-      return $iteration = Iteration::all();
+         return $iteration = Iteration::with('settings')->get();
     }
     
     public function getIteration($id){
 	    $iteration = Iteration::where('id','=',$id)
-				    ->get();
+				    ->first();
 	    return $iteration;
     }
     
@@ -21,7 +21,9 @@ class IterationService
 	    $iteration->slug 	 = $array['name'];
 	    $iteration->version  = $array['version'];
 	    $iteration->installs = $array['installs'];
-	    $iteration->save();   
+	    $iteration->save();  
+
+	    return $iteration;
     }
     
     public function update($id, Array $array){

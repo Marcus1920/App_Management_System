@@ -24,14 +24,14 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition login-page">
+<body style="background-image:url('../../images/internal_bg.jpg')">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b> Siyaleader Mobile </a>
+    <a href="../../index2.html" style="color:white"><b> Siyaleader App Management System </a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <img src="../../images/login-logo.png" style="margin-left:70px; width:150px">
    @if($errors->any())
      <span style="color: red">{{$errors->first()}}</span>
     @endif

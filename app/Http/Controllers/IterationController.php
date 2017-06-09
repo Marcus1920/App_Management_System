@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\IterationService;
+use App\Services\IterationSettingService;
 
 class IterationController extends Controller
 {
 	
     protected $iteration;
+    protected $setting;
     
-    function __construct(IterationService $service){
+    function __construct(IterationService $service, IterationSettingService $settingService){
 	    
 	    $this->iteration = $service;
+	    $this->setting   = $settingService;
     }
     /**
      * Display a listing of the resource.
@@ -47,13 +50,45 @@ class IterationController extends Controller
      */
     public function store(Request $request)
     {
+	    
+	    	
+	$logosFolder = 'logos/'.$request['name'];
+
+        if(!\File::exists($logosFolder)) {
+             $createDir         = \File::makeDirectory($logosFolder,0777,true);
+        }
+
+       $fileName          = $request->file('image')->getClientOriginalName();
+       $fileFullPath      = $logosFolder.'/'.$fileName;
+
+        if(!\File::exists($fileFullPath)) {
+
+            $request->file('image')->move($logosFolder,$fileName);
+            
+        }
+
+
+	    
+	    
+	    
+	    
 	$iterations = [
 			'name' => $request['name'],
 			'version' => $request['version'],
 			'installs' => 0,
 			];
 			
-	$this->iteration->store($iterations);
+	$iterationObj = $this->iteration->store($iterations);
+	
+	$settings = [
+			
+			'iteration_id' => $iterationObj->id,
+			'endpoint' => $request['end_point'],
+			'bg_image' => $fileName,
+			'logo' => $request['logo'],
+			];
+		
+	$this->setting->store($settings);
 	return redirect('getAll');
     }
 
@@ -65,7 +100,9 @@ class IterationController extends Controller
      */
     public function show($id)
     {
-        return $this->iteration->getIteration($id);
+        $iteration =  $this->iteration->getIteration($id);
+	//return $iteration;
+        return view('apps.edit',compact('iteration'));
     }
 
     /**
