@@ -28,10 +28,10 @@ class LoginController extends Controller
 
       if(Sentinel::check()==true)
       {
-//        return redirect('home');
+        session()->put('username',$request->email);
         return redirect()->route('home');
       }else{
-          return redirect('login');
+          return redirect()->back()->withErrors("Invalid username or password");
       }
 
     }
