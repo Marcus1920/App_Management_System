@@ -33,11 +33,11 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="{{url('home')}}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>Siya</b>Leader</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Siyaleader</span>
+      <span class="logo-lg"><b>Siyaleader</b></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
@@ -171,7 +171,7 @@
                 <img src="/images/login-logo.png" class="img-circle" alt="User Image">
 
                 <p>
-                {{ Sentinel::getUser()->first_name }}  <br>
+                {{ Sentinel::getUser()->first_name }}
                 <span>Administractor</span>
 
                 </p>
@@ -209,6 +209,7 @@
         </div>
         <div class="pull-left info">
           <p> Hi      {{ Sentinel::getUser()->first_name }} </p>
+
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>

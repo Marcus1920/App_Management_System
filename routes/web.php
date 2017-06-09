@@ -39,10 +39,12 @@ Route::get('/logout', function(){
 
 
 
-Route::get('home', 'HomeController@index')->name('home');
-Route::get('register','RegisterController@registrationForm');
-Route::post('register','RegisterController@registerUser');
-Route::get('logout' , 'RegisterController@logout') ;
+Route::get('home', 'HomeController@index')->name('home')->middleware('UserRole');
+
+Route::get('register','RegisterController@registrationForm')->middleware('UserRole');
+Route::post('register','RegisterController@registerUser')->middleware('UserRole');
+
+Route::get('logout' , 'RegisterController@logout')->middleware('UserRole');
 
 
 Route::get('add-iteration',function(){
@@ -54,3 +56,9 @@ Route::get('getIteration/{id}','IterationController@show');
 Route::post('storeIteration','IterationController@store');
 Route::get('editIteration/{id}','IterationController@edit');
 Route::get('deleteIteration/{id}','IterationController@destroy');
+
+Route::get('/activate/{email}/{activationCode}','ActivationController@Activate');
+
+Route::get('Addroles','RolesController@index');
+Route::post('Addroles','RolesController@store');
+

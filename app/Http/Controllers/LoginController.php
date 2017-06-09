@@ -26,13 +26,34 @@ class LoginController extends Controller
     {
         Sentinel::authenticate($request->all());
 
+
+
       if(Sentinel::check()==true)
       {
+          $slug=Sentinel::getUser()->roles()->first()->slug;
+
+          if($slug=='user')
+          {
+
+//              return redirect('home');
+              return "user";
+
+          }elseif($slug=='admin')
+          {
+//              return "admin";
+
+              return redirect('home');
+          }
+
+
+
         session()->put('username',$request->email);
         return redirect()->route('home');
+
       }else{
           return redirect()->back()->withErrors("Invalid username or password");
       }
+
 
     }
 

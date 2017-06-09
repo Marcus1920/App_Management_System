@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Sentinel;
+use Activation;
+use Mail;
 
 class RegisterController extends Controller
 {
@@ -22,8 +24,8 @@ class RegisterController extends Controller
       public function logout()
       {
 
-       session()->flush();
-       Sentinel::logout(null, true);
+
+       Sentinel::logout();
 
           return   redirect('/');
 
@@ -34,11 +36,16 @@ class RegisterController extends Controller
     {
       // Activate  the  use  using  the  email
 
-      /*   $User         = Sentinel::register(Input::all());
+         $User         = Sentinel::register($request->all());
+
+        $Role          =Sentinel::findRoleBySlug($request['roles']);
+        $Role->users()->attach($User);
+
+
          $activation   =  Activation::create($User);
-         $this->Sendemai($User ,$activation->code ) ;
-         */
-       Sentinel::registerAndActivate($request->all());
+         $this->Sendemail($User ,$activation->code ) ;
+
+//       Sentinel::registerAndActivate($request->all());
 
 
 
@@ -51,13 +58,11 @@ class RegisterController extends Controller
     'user'  => $user  ,
     'code'  => $code
 
-
-      ] , function($message) use  ($user) {
+    ] , function($message) use  ($user) {
 
       $message->to   ($user ->email) ;
-      $message->subject  (" hello "  . $user ->first_name ,
+      $message->subject  (" hello "  . $user ->first_name , "Activate  your  account . " );
 
-    "Activate  your  account . " ) ;
 
       }) ;
 

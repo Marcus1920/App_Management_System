@@ -35,7 +35,7 @@
    @if($errors->any())
      <span style="color: red">{{$errors->first()}}</span>
     @endif
-    <form action="login"  method="post">
+    <form action="login"  method="post" autocomplete="off">
       {{ csrf_field() }}
     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
 
